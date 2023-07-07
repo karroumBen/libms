@@ -4,6 +4,13 @@
  */
 package librarysystem;
 
+import business.LibraryMember;
+import dataaccess.DataAccessFacade;
+import dataaccess.User;
+
+import javax.swing.*;
+import java.util.HashMap;
+
 /**
  *
  * @author garit
@@ -161,7 +168,24 @@ public class LoginView extends javax.swing.JFrame implements LibWindow {
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        System.out.println("Back to main");
+        String usernameValue = username.getText();
+        String passwordValue = password.getText();
+
+        DataAccessFacade dataAccessFacade = new DataAccessFacade();
+        HashMap<String, User> members = dataAccessFacade.readUserMap();
+        User member = members.get(usernameValue);
+        if(member == null) {
+            JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if(!member.getPassword().equals(passwordValue)) {
+            JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        System.out.println("The role of the user is: " + member.getAuthorization());
+
         LibrarySystem.hideAllWindows();
         MainView.INSTANCE.setVisible(true);
         
