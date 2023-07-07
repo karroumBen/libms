@@ -184,6 +184,8 @@ public class LoginView extends javax.swing.JFrame implements LibWindow {
             return;
         }
 
+        System.out.println("The role of the user is: " + member.getAuthorization());
+
         LibrarySystem.hideAllWindows();
         MainView.INSTANCE.setVisible(true);
         
