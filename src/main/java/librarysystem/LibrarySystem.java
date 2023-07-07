@@ -45,6 +45,14 @@ public class LibrarySystem extends JFrame implements LibWindow {
 			
 		}
 	}
+
+	public static void showAllWindows() {
+		for(LibWindow frame: allWindows) {
+			frame.setVisible(true);
+		}
+	}
+    
+    
     private LibrarySystem() {}
     
     public void init() {
