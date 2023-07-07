@@ -84,13 +84,9 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
         logoutBtn.setText("Log out");
         logoutBtn.setBorder(null);
         logoutBtn.addActionListener(evt -> {
-
             LibrarySystem.hideAllWindows();
             Util.centerFrameOnDesktop(LoginView.INSTANCE);
             LoginView.INSTANCE.setVisible(true);
-//
-//            LibrarySystem.showAllWindows();
-//            INSTANCE.setVisible(false);
         });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
