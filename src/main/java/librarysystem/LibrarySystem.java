@@ -84,7 +84,8 @@ public class LibrarySystem extends JFrame implements LibWindow {
     
     private void insertSplashImage() {
         ImageIcon image = new ImageIcon(pathToImage);
-		mainPanel.add(new JLabel(image));	
+        System.out.println(pathToImage);
+        mainPanel.add(new JLabel(image));	
     }
     private void createMenus() {
     	menuBar = new JMenuBar();
