@@ -182,7 +182,6 @@ public class LoginView extends javax.swing.JFrame implements LibWindow {
         DataAccessFacade.saveCurrentUser(member);
         LibrarySystem.hideAllWindows();
         MainView.INSTANCE.reveal();
-        
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
