@@ -16,7 +16,7 @@ import dataaccess.DataAccessFacade.StorageType;
 
 
 public class DataAccessFacade implements DataAccess {
-	
+	private static User CURRENT_USER;
 	enum StorageType {
 		BOOKS, MEMBERS, USERS;
 	}
@@ -76,6 +76,15 @@ public class DataAccessFacade implements DataAccess {
 		HashMap<String, LibraryMember> members = new HashMap<String, LibraryMember>();
 		memberList.forEach(member -> members.put(member.getMemberId(), member));
 		saveToStorage(StorageType.MEMBERS, members);
+	}
+
+	public static void saveCurrentUser(User currentUser) {
+		System.out.println("Saving current user as: " + currentUser);
+		CURRENT_USER = currentUser;
+	}
+
+	public static User getCurrentUser() {
+		return CURRENT_USER;
 	}
 	
 	static void saveToStorage(StorageType type, Object ob) {
