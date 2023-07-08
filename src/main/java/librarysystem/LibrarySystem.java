@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 
 import business.ControllerInterface;
 import business.SystemController;
+import java.util.Arrays;
 
 
 public class LibrarySystem extends JFrame implements LibWindow {
