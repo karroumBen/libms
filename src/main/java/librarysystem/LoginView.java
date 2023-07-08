@@ -183,7 +183,6 @@ public class LoginView extends javax.swing.JFrame implements LibWindow {
 
         LibrarySystem.hideAllWindows();
         MainView.INSTANCE.setVisible(true);
-        
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
