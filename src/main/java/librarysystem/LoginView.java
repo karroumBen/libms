@@ -181,8 +181,9 @@ public class LoginView extends javax.swing.JFrame implements LibWindow {
 
         System.out.println("The role of the user is: " + member.getAuthorization());
 
+        DataAccessFacade.setCurrentUser(member);
         LibrarySystem.hideAllWindows();
-        MainView.INSTANCE.setVisible(true);
+        MainView.INSTANCE.reveal();
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**

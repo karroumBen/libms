@@ -17,7 +17,7 @@ import dataaccess.DataAccessFacade.StorageType;
 
 public class DataAccessFacade implements DataAccess {
 
-    
+    private static User currentUser;
 	
 	enum StorageType {
 		BOOKS, MEMBERS, USERS;
@@ -151,5 +151,12 @@ public class DataAccessFacade implements DataAccess {
 		}
 		private static final long serialVersionUID = 5399827794066637059L;
 	}
-	
+
+	public static User getCurrentUser() {
+		return currentUser;
+	}
+
+	public static void setCurrentUser(User u) {
+		currentUser = u;
+	}
 }
