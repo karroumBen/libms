@@ -18,6 +18,11 @@ import java.util.List;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import dataaccess.DataAccessFacade;
+import dataaccess.User;
+
+import static dataaccess.Auth.ADMIN;
+import static dataaccess.Auth.LIBRARIAN;
 
 /**
  * @author garit
@@ -27,6 +32,8 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
     private boolean isInitialized;
     private User currentUser;
     private List<Author> authors;
+    private User currentUser;
+
     /**
      * Creates new form MainView
      */
