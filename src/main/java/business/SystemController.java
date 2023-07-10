@@ -87,7 +87,6 @@ public class SystemController implements ControllerInterface {
     
     public LibraryMember searchLibraryMember(String memberId){
         DataAccess da = new DataAccessFacade();
-        //Address address = null; //new Address(aStreet,aCity,aState,aZip);
         LibraryMember member = null;
         for(LibraryMember libMem:da.readMemberMap().values()){
             String memId = libMem.getMemberId();
