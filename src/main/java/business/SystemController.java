@@ -249,9 +249,17 @@ public class SystemController implements ControllerInterface {
 	
     
     public void handleNewMemberCreation(String aFirstName, String aLastName, String aPhone, String aStreet, String aCity, String aZip, String aState) {
-        String memberId = "1005";
+        DataAccess da = new DataAccessFacade();
+        LibraryMember member;
+        String memId = null;
+        for(LibraryMember libMem:da.readMemberMap().values()){
+            memId = libMem.getMemberId();
+        }
+        String memberIdString = memId;
+        int memberIdInt = Integer.parseInt(memberIdString) + 1;
+        String memberId = Integer.toString(memberIdInt);        
         Address address = new Address(aStreet,aCity,aState,aZip);
-        LibraryMember member = new LibraryMember(memberId, aFirstName, aLastName,aPhone, address);
+        member = new LibraryMember(memberId, aFirstName, aLastName,aPhone, address);
         addNewMember(member);
     }
     
