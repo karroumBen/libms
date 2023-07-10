@@ -47,6 +47,17 @@ public class SystemController implements ControllerInterface {
         da.saveNewBook(book);
         System.out.println(da.readBooksMap().toString());
     }
-	
-	
+    
+    public void handleNewMemberCreation(String aFirstName, String aLastName, String aPhone, String aStreet, String aCity, String aZip, String aState) {
+        String memberId = "1005";
+        Address address = new Address(aStreet,aCity,aState,aZip);
+        LibraryMember member = new LibraryMember(memberId, aFirstName, aLastName,aPhone, address);
+        
+        addNewMember(member);
+        
+    }
+    public void  addNewMember(LibraryMember member){
+        DataAccess da = new DataAccessFacade();
+        da.saveNewMember(member);
+    }
 }

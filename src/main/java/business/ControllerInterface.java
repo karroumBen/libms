@@ -11,5 +11,5 @@ public interface ControllerInterface {
 	public List<String> allMemberIds();
 	public List<String> allBookIds();
         public void addNewBook(Book book);
-	
+        public void addNewMember(LibraryMember member);            
 }
