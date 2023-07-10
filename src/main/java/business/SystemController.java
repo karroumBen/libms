@@ -10,8 +10,6 @@ import dataaccess.DataAccessFacade;
 import dataaccess.User;
 import java.time.LocalDate;
 import java.util.Map;
-import java.util.Vector;
-import javax.swing.JOptionPane;
 
 public class SystemController implements ControllerInterface {
 	public static Auth currentAuth = null;
@@ -54,6 +52,7 @@ public class SystemController implements ControllerInterface {
     @Override
     public void addBookCopy(Book book) {
         book.addCopy();
+        addNewBook(book);
     }
     public boolean handleBookCopy(String isbn) {
        boolean isSuccessful = true;
