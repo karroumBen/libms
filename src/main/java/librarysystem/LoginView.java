@@ -5,6 +5,7 @@
 package librarysystem;
 
 import business.LibraryMember;
+import business.SystemController;
 import dataaccess.DataAccessFacade;
 import dataaccess.User;
 
@@ -18,6 +19,7 @@ import java.util.HashMap;
 public class LoginView extends javax.swing.JFrame implements LibWindow {
     public static final LoginView INSTANCE = new LoginView();
     private boolean isInitialized;
+    private SystemController controller = new SystemController();
     /**
      * Creates new form LoginView
      */
@@ -165,25 +167,22 @@ public class LoginView extends javax.swing.JFrame implements LibWindow {
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         String usernameValue = username.getText();
         String passwordValue = password.getText();
-
-        DataAccessFacade dataAccessFacade = new DataAccessFacade();
-        HashMap<String, User> members = dataAccessFacade.readUserMap();
-        User member = members.get(usernameValue);
-        if(member == null) {
-            JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+        HashMap<String, String> result = controller.handleLogin(usernameValue,passwordValue);
+        if(!result.isEmpty()) {
+            String type = result.get("type");
+            if(type == "Success") {
+                JOptionPane.showMessageDialog(this, result.get("message"), result.get("type"), JOptionPane.INFORMATION_MESSAGE);
+                LibrarySystem.hideAllWindows();
+                Util.centerFrameOnDesktop(MainView.INSTANCE);
+                MainView.INSTANCE.reveal();
+                
+                return;
+            }
+            if(type=="Error") {
+                JOptionPane.showMessageDialog(this, result.get("message"), result.get("type"), JOptionPane.ERROR_MESSAGE);
+                return;
+            }
         }
-
-        if(!member.getPassword().equals(passwordValue)) {
-            JOptionPane.showMessageDialog(this, "Invalid username or password", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        System.out.println("The role of the user is: " + member.getAuthorization());
-
-        DataAccessFacade.setCurrentUser(member);
-        LibrarySystem.hideAllWindows();
-        MainView.INSTANCE.reveal();
     }//GEN-LAST:event_loginBtnActionPerformed
 
     /**
