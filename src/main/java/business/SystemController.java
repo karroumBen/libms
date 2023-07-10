@@ -47,6 +47,55 @@ public class SystemController implements ControllerInterface {
         da.saveNewBook(book);
         System.out.println(da.readBooksMap().toString());
     }
-	
-	
+    
+    public void handleNewMemberCreation(String aFirstName, String aLastName, String aPhone, String aStreet, String aCity, String aZip, String aState) {
+        String memberId = "1005";
+        Address address = new Address(aStreet,aCity,aState,aZip);
+        LibraryMember member = new LibraryMember(memberId, aFirstName, aLastName,aPhone, address);
+        addNewMember(member);
+    }
+    
+    @Override
+    public void  addNewMember(LibraryMember member){
+        DataAccess da = new DataAccessFacade();
+        da.saveNewMember(member);
+    }
+    
+    public void handleUpdateMember(String memberId, String aFirstName, String aLastName, String aPhone, String aStreet, String aCity, String aZip, String aState){
+        DataAccess da = new DataAccessFacade();
+        Address address = new Address(aStreet,aCity,aState,aZip);
+        LibraryMember member = null;
+        for(LibraryMember libMem:da.readMemberMap().values()){
+            String memId = libMem.getMemberId();
+            if(memId.equals(memberId)){
+                libMem.setFirstName(aFirstName);
+                libMem.setLastName(aLastName);
+                libMem.setAddress(address);
+                libMem.setTelephone(aPhone);
+                member = libMem;
+                break;
+            }
+        }
+        updateNewMember(member);
+    }
+    
+    @Override
+    public void updateNewMember(LibraryMember member){
+        DataAccess da = new DataAccessFacade();
+        da.saveNewMember(member);
+    }
+    
+    public LibraryMember searchLibraryMember(String memberId){
+        DataAccess da = new DataAccessFacade();
+        //Address address = null; //new Address(aStreet,aCity,aState,aZip);
+        LibraryMember member = null;
+        for(LibraryMember libMem:da.readMemberMap().values()){
+            String memId = libMem.getMemberId();
+            if(memId.equals(memberId)){
+                member = libMem;
+                break;
+            }
+        }
+        return member;
+    }
 }
