@@ -86,19 +86,19 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fName = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        lName = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        phoneNumber = new javax.swing.JTextField();
+        streetAddress = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        cityAddress = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        zip = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        stateAddress = new javax.swing.JComboBox<>();
         saveUpdatedMemberBtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         editViewMemberTable = new javax.swing.JTable();
@@ -1325,11 +1325,32 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
         // TODO add your handling code here:
         // TODO: Suraju implement here saving a new library member.
+        String aFirstName = firstName.getText();
+        String aLastName = lastName.getText();
+        String aPhone = phone.getText();
+        String aStreet = street.getText();
+        String aCity = city.getText();
+        String aZipCode = zipCode.getText();
+        String aState = state.getSelectedItem().toString();
+        SystemController controller = new SystemController();
+        controller.handleNewMemberCreation(aFirstName, aLastName, aPhone, aStreet, aCity, aZipCode, aState);
     }//GEN-LAST:event_saveBtnActionPerformed
 
     private void saveUpdatedMemberBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUpdatedMemberBtnActionPerformed
         // TODO add your handling code here:
         // TODO: Suraju implement here editing member a new library member.
+        String memberId = searchText.getText();
+        String aFirstName = fName.getText();
+        String aLastName = lName.getText();
+        String aPhone = phoneNumber.getText();
+        String aStreet = streetAddress.getText();
+        String aCity = cityAddress.getText();
+        String aZipCode = zip.getText();
+        String aState = stateAddress.getSelectedItem().toString();
+        Address address = new Address(aStreet,aCity,aState,aZipCode);
+        LibraryMember member = new LibraryMember(memberId,aFirstName,aLastName,aPhone,address);
+        SystemController controller = new SystemController();
+        controller.updateNewMember(member);
     }//GEN-LAST:event_saveUpdatedMemberBtnActionPerformed
 
     private void addCopyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCopyBtnActionPerformed
@@ -1438,6 +1459,19 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
         bookListPanel.setVisible(false);
         memberListPanel.setVisible(true);
     }//GEN-LAST:event_memberListActionPerformed
+    private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
+        // TODO add your handling code here:
+        String memberId = searchText.getText();
+        SystemController controller = new SystemController();
+        LibraryMember member = controller.searchLibraryMember(memberId);
+        fName.setText(member.getFirstName());
+        lName.setText(member.getLastName());
+        phoneNumber.setText(member.getTelephone());
+        streetAddress.setText(member.getAddress().getStreet());
+        cityAddress.setText(member.getAddress().getCity());
+        zip.setText(member.getAddress().getZip());
+        stateAddress.setSelectedItem(member.getAddress().getState());
+    }//GEN-LAST:event_searchBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1502,6 +1536,7 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
     private javax.swing.JButton checkoutRecordsBtn;
     private javax.swing.JPanel checkoutRecordsView;
     private javax.swing.JTextField city;
+    private javax.swing.JTextField cityAddress;
     private javax.swing.JButton editMemberBtn;
     private javax.swing.JPanel editMemberView;
     private javax.swing.JTable editViewMemberTable;
@@ -1510,6 +1545,7 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
     private javax.swing.JTextField isbnInCheckoutTxt;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JTextField fName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1566,6 +1602,7 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField lName;
     private javax.swing.JTextField lastName;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JSpinner maxCheckoutLength;
@@ -1576,6 +1613,7 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
     private javax.swing.JTable membersTable1;
     private javax.swing.JPanel newMemberView;
     private javax.swing.JTextField phone;
+    private javax.swing.JTextField phoneNumber;
     private javax.swing.JButton saveAuthorBtn;
     private javax.swing.JButton saveBookBtn;
     private javax.swing.JButton saveBtn;
@@ -1583,8 +1621,11 @@ public class MainView extends javax.swing.JFrame implements LibWindow {
     private javax.swing.JButton searchBtn;
     private javax.swing.JTextField searchText;
     private javax.swing.JComboBox<String> state;
+    private javax.swing.JComboBox<String> stateAddress;
     private javax.swing.JTextField street;
+    private javax.swing.JTextField streetAddress;
     private javax.swing.JPanel viewContainer;
+    private javax.swing.JTextField zip;
     private javax.swing.JTextField zipCode;
     // End of variables declaration//GEN-END:variables
 
